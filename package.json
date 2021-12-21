@@ -3,8 +3,5 @@
     "displayName": "Spettro Utilities",
     "version": "0.0.1",
     "description": "Package of useful utilities used and made by Spettro Games.",
-    "author": {"name": "NextinFRFX", "email": "windowsred7198@gmail.com"},
-    "dependencies": {
-        "discord": "https://github.com/HouraiTeahouse/Discord-Game-SDK.git@2.5.6"
-    }
+    "author": {"name": "NextinFRFX", "email": "windowsred7198@gmail.com"}
 }
