@@ -5,6 +5,6 @@
     "description": "Package of useful utilities used and made by Spettro Games.",
     "author": {"name": "NextinFRFX", "email": "windowsred7198@gmail.com"},
     "dependencies": {
-        "com.discord.game-sdk": "https://github.com/HouraiTeahouse/Discord-Game-SDK.git"
+        "com.discord.game-sdk": "https://github.com/HouraiTeahouse/Discord-Game-SDK.git@2.5.6"
     }
 }
