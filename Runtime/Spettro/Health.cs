@@ -19,10 +19,8 @@ namespace Spettro.HP
         public UnityEvent<int> OnHeal;
         public UnityEvent<int> OnDeath;
         public UnityEvent OnLivesOver;
-        private GameManager gm;
         public void Start()
         {
-            gm = GameManager.Instance;
             HealthSet();
         }
         public void HealthSet()
@@ -32,7 +30,7 @@ namespace Spettro.HP
 
         public void Damage(int amount)
         {
-            DLog.Log("Recieved damage of " + amount);
+            Debug.Log("Recieved damage of " + amount);
             HP -= amount;
             if (HP <= 0)
             {
@@ -41,7 +39,7 @@ namespace Spettro.HP
                 {
                     OnDeath.Invoke(HP);
                     if (log)
-                        DLog.LogWarning(gameObject.name + " has died.");
+                        Debug.LogWarning(gameObject.name + " has died.");
                     if (resetOnDeath)
                         HealthSet();
                     if (lives)
@@ -58,15 +56,9 @@ namespace Spettro.HP
             {
                 OnDamage.Invoke(HP);
                 if (log)
-                    DLog.LogWarning($"{gameObject.name} recieved damage ({amount}). New HP: {HP}");
+                    Debug.LogWarning($"{gameObject.name} recieved damage ({amount}). New HP: {HP}");
             }
 
-        }
-
-        public void GivePoints(float amount)
-        {
-            if (gm != null)
-                gm.pointCounter += amount;
         }
         public void Heal(int amount)
         {
@@ -79,7 +71,7 @@ namespace Spettro.HP
             {
                 OnHeal.Invoke(HP);
                 if (log)
-                    DLog.LogWarning($"{gameObject.name} has been healed by {amount}. New HP: {HP}");
+                    Debug.LogWarning($"{gameObject.name} has been healed by {amount}. New HP: {HP}");
             }
         }
 
@@ -89,6 +81,4 @@ namespace Spettro.HP
         }
 
     }
-
-
 }

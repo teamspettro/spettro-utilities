@@ -1,15 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using MonoSpace.Settings;
 using System.IO;
+using Spettro;
 
-namespace Spettro.Settings
+namespace Spettro.SettingsSystem
 {
     public class Settings : BaseJsonSettingsModel
     {
         public Settings()
-        : base(Path.Combine(CommonResources.UserPath, "config.sg"), false)
+        : base(Path.Combine(SpettroResources.UserPath, "config.sg"), false)
         {
         }
 

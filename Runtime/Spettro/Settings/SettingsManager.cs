@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
 
-namespace Spettro.Settings
+namespace Spettro.SettingsSystem
 {
     /// <summary>
     /// Script that manages settings with d2dyno's Setting System.
@@ -12,12 +12,11 @@ namespace Spettro.Settings
         #region Get
         public static int GetInt(string name, int defaultValue = 0)
         {
-            if (CommonResources.Settings.Int == null)
+            if (SpettroResources.Settings.Int == null)
             {
-                CommonResources.Settings.Int = new Dictionary<string, int>();
+                SpettroResources.Settings.Int = new Dictionary<string, int>();
             }
-            var settingsInt = CommonResources.Settings.Int;
-            DLog.Log($"SEM: GET INT {name} DEF {defaultValue}");
+            var settingsInt = SpettroResources.Settings.Int;
             if (settingsInt.ContainsKey(name))
             {
                 int keyVal;
@@ -27,18 +26,17 @@ namespace Spettro.Settings
             else
             {
                 settingsInt.Add(name, defaultValue);
-                CommonResources.Settings.Int = settingsInt;
+                SpettroResources.Settings.Int = settingsInt;
                 return defaultValue;
             }
         }
         public static float GetFloat(string name, float defaultValue = 0)
         {
-            if (CommonResources.Settings.Float == null)
+            if (SpettroResources.Settings.Float == null)
             {
-                CommonResources.Settings.Float = new Dictionary<string, float>();
+                SpettroResources.Settings.Float = new Dictionary<string, float>();
             }
-            DLog.Log($"SEM: GET FLOAT {name} DEF {defaultValue}");
-            var settingsFloat = CommonResources.Settings.Float;
+            var settingsFloat = SpettroResources.Settings.Float;
             if (settingsFloat.ContainsKey(name))
             {
                 float keyVal;
@@ -48,19 +46,18 @@ namespace Spettro.Settings
             else
             {
                 settingsFloat.Add(name, defaultValue);
-                CommonResources.Settings.Float = settingsFloat;
+                SpettroResources.Settings.Float = settingsFloat;
                 return defaultValue;
             }
         }
 
         public static string GetString(string name, string defaultValue = "", bool decode64 = false)
         {
-            if (CommonResources.Settings.String == null)
+            if (SpettroResources.Settings.String == null)
             {
-                CommonResources.Settings.String = new Dictionary<string, string>();
-            }
-            DLog.Log($"SEM: GET STRING {name} DEF {defaultValue} D64 {decode64}");
-            var settingsString = CommonResources.Settings.String;
+                SpettroResources.Settings.String = new Dictionary<string, string>();
+            }          
+            var settingsString = SpettroResources.Settings.String;
             if (settingsString.ContainsKey(name))
             {
                 string keyVal;
@@ -74,18 +71,17 @@ namespace Spettro.Settings
             else
             {
                 settingsString.Add(name, defaultValue);
-                CommonResources.Settings.String = settingsString;
+                SpettroResources.Settings.String = settingsString;
                 return defaultValue;
             }
         }
         public static bool GetBool(string name, bool defaultValue = false)
         {
-            if (CommonResources.Settings.Bool == null)
+            if (SpettroResources.Settings.Bool == null)
             {
-                CommonResources.Settings.Bool = new Dictionary<string, bool>();
+                SpettroResources.Settings.Bool = new Dictionary<string, bool>();
             }
-            DLog.Log($"SEM: GET BOOL {name} DEF {defaultValue}");
-            var settingsBool = CommonResources.Settings.Bool;
+            var settingsBool = SpettroResources.Settings.Bool;
             if (settingsBool.ContainsKey(name))
             {
                 bool keyVal;
@@ -95,98 +91,97 @@ namespace Spettro.Settings
             else
             {
                 settingsBool.Add(name, defaultValue);
-                CommonResources.Settings.Bool = settingsBool;
+                SpettroResources.Settings.Bool = settingsBool;
                 return defaultValue;
             }
         }
         public static object EnumerateSettings()
         {
-            return CommonResources.Settings.ExportSettings();
+            return SpettroResources.Settings.ExportSettings();
         }
         #endregion
         #region Set
         public static void SetInt(string name, int value)
         {
-            if (CommonResources.Settings.Int == null)
+            if (SpettroResources.Settings.Int == null)
             {
-                CommonResources.Settings.Int = new Dictionary<string, int>();
+                SpettroResources.Settings.Int = new Dictionary<string, int>();
             }
-            DLog.Log($"SEM: SET INT {name} VAL {value}");
-            var settingsInt = CommonResources.Settings.Int;
+           
+            var settingsInt = SpettroResources.Settings.Int;
             settingsInt[name] = value;
-            CommonResources.Settings.Int = settingsInt;
+            SpettroResources.Settings.Int = settingsInt;
         }
 
         public static void SetFloat(string name, float value)
         {
-            if (CommonResources.Settings.Float == null)
+            if (SpettroResources.Settings.Float == null)
             {
-                CommonResources.Settings.Float = new Dictionary<string, float>();
+                SpettroResources.Settings.Float = new Dictionary<string, float>();
             }
-            DLog.Log($"SEM: SET FLOAT {name} VAL {value}");
-            var settingsFloat = CommonResources.Settings.Float;
+          
+            var settingsFloat = SpettroResources.Settings.Float;
             settingsFloat[name] = value;
-            CommonResources.Settings.Float = settingsFloat;
+            SpettroResources.Settings.Float = settingsFloat;
 
         }
         public static void SetString(string name, string value, bool encode64 = false)
         {
-            if (CommonResources.Settings.String == null)
+            if (SpettroResources.Settings.String == null)
             {
-                CommonResources.Settings.String = new Dictionary<string, string>();
+                SpettroResources.Settings.String = new Dictionary<string, string>();
             }
-            DLog.Log($"SEM: SET STRING {name} VAL {value} E64 {encode64}");
+            
             if (encode64)
             {
                 value = EncodingManager.EncodeB64(value);
             }
-            var settingsString = CommonResources.Settings.String;
+            var settingsString = SpettroResources.Settings.String;
             settingsString[name] = value;
-            CommonResources.Settings.String = settingsString;
+            SpettroResources.Settings.String = settingsString;
         }
         public static void SetBool(string name, bool value)
         {
-            if (CommonResources.Settings.Bool == null)
+            if (SpettroResources.Settings.Bool == null)
             {
-                CommonResources.Settings.Bool = new Dictionary<string, bool>();
+                SpettroResources.Settings.Bool = new Dictionary<string, bool>();
             }
-            DLog.Log($"SEM: SET BOOL {name} VAL {value}");
-            var settingsBool = CommonResources.Settings.Bool;
+           
+            var settingsBool = SpettroResources.Settings.Bool;
             settingsBool[name] = value;
-            CommonResources.Settings.Bool = settingsBool;
+            SpettroResources.Settings.Bool = settingsBool;
         }
         #endregion
         #region Delete
         public static void DeleteAll()
         {
-            var settings = CommonResources.Settings;
+            var settings = SpettroResources.Settings;
 
             settings.String.Clear();
             settings.Int.Clear();
             settings.Float.Clear();
-            DLog.LogWarning("Reset all dictionaries for settings.");
-            CommonResources.Settings = settings;
+            SpettroResources.Settings = settings;
         }
         #endregion
 
         #region Has
         public static bool HasInt(string key)
         {
-            var settings = CommonResources.Settings.Int;
+            var settings = SpettroResources.Settings.Int;
             int val;
             return settings.TryGetValue(key, out val);
 
         }
         public static bool HasFloat(string key)
         {
-            var settings = CommonResources.Settings.Float;
+            var settings = SpettroResources.Settings.Float;
             float val;
             return settings.TryGetValue(key, out val);
 
         }
         public static bool HasString(string key)
         {
-            var settings = CommonResources.Settings.String;
+            var settings = SpettroResources.Settings.String;
             string val;
             return settings.TryGetValue(key, out val);
 

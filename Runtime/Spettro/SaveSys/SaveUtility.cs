@@ -1,4 +1,4 @@
-using MonoSpace.SaveSystem;
+using Spettro.SaveSystem;
 using UnityEngine;
 
 public static class SaveUtility
@@ -20,7 +20,7 @@ public static class SaveUtility
         }
         if (hadToRepair)
         {
-            DLog.LogWarning($"Had to repair save {slot}. [OLI]");
+            Debug.LogWarning($"Had to repair save {slot}. [OLI]");
         }
     }
 

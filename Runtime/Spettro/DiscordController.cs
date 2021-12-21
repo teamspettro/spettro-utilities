@@ -65,7 +65,7 @@ namespace Spettro.DiscordGameSDK
             }
             catch (Exception ex)
             {
-                DLog.LogError($"DiscordManager lost callbacks!\n{ex}", this);
+                Debug.LogError($"DiscordManager lost callbacks!\n{ex}", this);
                 this.enabled = false;
             }
 
@@ -80,7 +80,7 @@ namespace Spettro.DiscordGameSDK
             }
             catch (Exception ex)
             {
-                DLog.LogError($"DiscordManager was unable to dispose of Discord Activity!\n{ex}", this);
+                Debug.LogError($"DiscordManager was unable to dispose of Discord Activity!\n{ex}", this);
             }
         }
         
@@ -121,7 +121,7 @@ namespace Spettro.DiscordGameSDK
                             }
                         case DiscordActivityObject.TimeStampMode.Remaining:
                             {
-                                DLog.Log("Remaining has not been implemented yet.", this);
+                                Debug.Log("Remaining has not been implemented yet.", this);
                                 break;
                             }
                     }
@@ -151,11 +151,11 @@ namespace Spettro.DiscordGameSDK
                     {
                         if (res == Discord.Result.Ok)
                         {
-                            DLog.Log("Status Update Success! [Discord]");
+                            Debug.Log("Status Update Success! [Discord]");
                         }
                         else
                         {
-                            DLog.Log("Status Update Failed! [Discord]");
+                            Debug.Log("Status Update Failed! [Discord]");
                         }
                     });
                     return;
@@ -176,11 +176,11 @@ namespace Spettro.DiscordGameSDK
                 {
                     if (res == Discord.Result.Ok)
                     {
-                        DLog.Log("Status Update Success! [Discord]");
+                        Debug.Log("Status Update Success! [Discord]");
                     }
                     else
                     {
-                        DLog.Log("Status Update Failed! [Discord]");
+                        Debug.Log("Status Update Failed! [Discord]");
                     }
                 });
             }

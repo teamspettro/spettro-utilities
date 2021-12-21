@@ -11,7 +11,7 @@ using Newtonsoft.Json.Linq;
 /// 
 /// d2dyno
 /// 
-namespace Spettro.Settings
+namespace Spettro.SettingsSystem
 {
     public abstract class BaseJsonSettingsModel
     {
@@ -90,7 +90,7 @@ namespace Spettro.Settings
             }
             catch (Exception ex)
             {
-                DLog.Log(ex);
+                UnityEngine.Debug.Log(ex);
                 Debugger.Break();
             }
         }
@@ -167,7 +167,7 @@ namespace Spettro.Settings
             }
             catch (Exception ex)
             {
-                DLog.Log(ex);
+                UnityEngine.Debug.Log(ex);
                 Debugger.Break();
 
                 return default;
@@ -236,7 +236,7 @@ namespace Spettro.Settings
             }
             catch (Exception ex)
             {
-               DLog.Log(ex);
+               UnityEngine.Debug.Log(ex);
                 Debugger.Break();
 
                 return false;

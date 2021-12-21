@@ -9,14 +9,14 @@ using System;
 /// 
 /// Originally made by Nextin, remade by d2dyno
 /// 
-namespace MonoSpace.SaveSystem
+namespace Spettro.SaveSystem
 {
     public class SaveManager
     {
         public static bool ENCODE_64 = true;
         public const string SAVES_DIRECTORY = "Save";
 
-        public static string APPLICATION_DIRECTORY = CommonResources.UserPath;
+        public static string APPLICATION_DIRECTORY = SpettroResources.UserPath;
         public static string FULL_PATH = Path.Combine(APPLICATION_DIRECTORY, SAVES_DIRECTORY);
 
         public static void Save(SaveObject obj, int saveNumber)
@@ -30,7 +30,7 @@ namespace MonoSpace.SaveSystem
             if (!Directory.Exists(savesDir))
                 Directory.CreateDirectory(savesDir);
 
-            CommonResources.CurrentSaveSlot = saveNumber;
+            SpettroResources.CurrentSaveSlot = saveNumber;
             using (FileStream fileStream = File.Create(filePath))
             {
                 string jsonSerialized = JsonConvert.SerializeObject(obj, Formatting.Indented);
@@ -39,7 +39,7 @@ namespace MonoSpace.SaveSystem
                 byte[] buffer = Encoding.Unicode.GetBytes(jsonSerialized);
                 fileStream.Write(buffer, 0, buffer.Length);
             }
-            CommonResources.Empty = false;
+            SpettroResources.Empty = false;
         }
 
         public static SaveObject Load(int saveNumber)
@@ -47,11 +47,11 @@ namespace MonoSpace.SaveSystem
             string savesDir = Path.Combine(APPLICATION_DIRECTORY, SAVES_DIRECTORY);
             string fileName = $"slot{saveNumber}.ms";
             string filePath = Path.Combine(savesDir, fileName);
-            
+
 
 
             SaveObject obj;
-            CommonResources.CurrentSaveSlot = saveNumber;
+            SpettroResources.CurrentSaveSlot = saveNumber;
             if (File.Exists(filePath))
             {
 
@@ -67,26 +67,26 @@ namespace MonoSpace.SaveSystem
                     {
 
                         obj = JsonConvert.DeserializeObject<SaveObject>(json);
-                        
+
                     }
                     catch (Exception ex)
                     {
                         fileStream.Close();
-                        DLog.LogError($"[SM] Could not convert SaveFile {saveNumber} into a SaveObject! Making a new one in place. {ex}");
-                        DLog.LogWarning($"[SM] Save {saveNumber} is empty. ");
+                        Debug.LogError($"[SM] Could not convert SaveFile {saveNumber} into a SaveObject! Making a new one in place. {ex}");
+                        Debug.LogWarning($"[SM] Save {saveNumber} is empty. ");
                         SaveObject newso = new SaveObject();
-                        newso.SaveID= saveNumber;
+                        newso.SaveID = saveNumber;
                         Save(newso, saveNumber);
                         return newso;
                     }
 
-                    CommonResources.Empty = false;
+                    SpettroResources.Empty = false;
                 }
             }
             else
             {
-                CommonResources.Empty = true;
-                DLog.LogWarning("[SM] The save file " + saveNumber + "was not found.");
+                SpettroResources.Empty = true;
+                Debug.LogWarning("[SM] The save file " + saveNumber + "was not found.");
                 return null;
             }
 
@@ -98,13 +98,13 @@ namespace MonoSpace.SaveSystem
             string fileName = $"save{saveNumber}.ms";
             string fullPath = Path.Combine(APPLICATION_DIRECTORY, SAVES_DIRECTORY, fileName);
             File.Delete(fullPath);
-            DLog.LogWarning("[SM] Deleted file at " + fullPath);
+            Debug.LogWarning("[SM] Deleted file at " + fullPath);
         }
 
         public static void DeleteAll()
         {
             List<SaveObject> objs = EnumerateSavesinSaveLoc();
-            foreach(SaveObject obj in objs)
+            foreach (SaveObject obj in objs)
             {
                 Delete(obj.SaveID);
             }
@@ -121,7 +121,7 @@ namespace MonoSpace.SaveSystem
             else
             {
                 Directory.CreateDirectory(FULL_PATH);
-                DLog.LogWarning("[SM] There are no save files / the directory does not exist.");
+                Debug.LogWarning("[SM] There are no save files / the directory does not exist.");
                 return saves;
             }
             //Search from every file found and see if it's a save or not.
@@ -143,16 +143,16 @@ namespace MonoSpace.SaveSystem
                         //Try to convert it into a SaveObject
                         obj = JsonUtility.FromJson<SaveObject>(json);
                         saves.Add(obj);
-                        CommonResources.Empty = false;
+                        SpettroResources.Empty = false;
                     }
-                    catch 
+                    catch
                     {
                         //If it isn't, instead of an error, just give a message.
-                        DLog.LogWarning($"[SM] Path \"{paths[i]}\" is not a valid save file.");
+                        Debug.LogWarning($"[SM] Path \"{paths[i]}\" is not a valid save file.");
                     }
-                    
+
                 }
-                
+
             }
             return saves;
         }

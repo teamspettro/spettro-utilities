@@ -3,5 +3,8 @@
     "displayName": "Spettro Utilities",
     "version": "0.0.1",
     "description": "Package of useful utilities used and made by Spettro Games.",
-    "author": {"name": "NextinFRFX", "email": "windowsred7198@gmail.com"}
+    "author": {"name": "NextinFRFX", "email": "windowsred7198@gmail.com"},
+    "dependencies": {
+        "com.unity.nuget.newtonsoft-json" : "2.0"
+    }
 }
