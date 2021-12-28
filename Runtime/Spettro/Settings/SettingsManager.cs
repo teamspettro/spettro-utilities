@@ -51,7 +51,7 @@ namespace Spettro.SettingsSystem
             }
         }
 
-        public static string GetString(string name, string defaultValue = "", bool decode64 = false)
+        public static string GetString(string name, string defaultValue = "")
         {
             if (SpettroResources.Settings.String == null)
             {
@@ -62,10 +62,6 @@ namespace Spettro.SettingsSystem
             {
                 string keyVal;
                 settingsString.TryGetValue(name, out keyVal);
-                if (EncodingManager.IsBase64String(keyVal) || decode64)
-                {
-                    keyVal = (string)EncodingManager.DecodeB64(keyVal);
-                }
                 return keyVal;
             }
             else
@@ -125,16 +121,11 @@ namespace Spettro.SettingsSystem
             SpettroResources.Settings.Float = settingsFloat;
 
         }
-        public static void SetString(string name, string value, bool encode64 = false)
+        public static void SetString(string name, string value)
         {
             if (SpettroResources.Settings.String == null)
             {
                 SpettroResources.Settings.String = new Dictionary<string, string>();
-            }
-            
-            if (encode64)
-            {
-                value = EncodingManager.EncodeB64(value);
             }
             var settingsString = SpettroResources.Settings.String;
             settingsString[name] = value;
