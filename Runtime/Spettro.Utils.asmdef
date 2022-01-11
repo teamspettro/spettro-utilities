@@ -8,7 +8,8 @@
         "macOSStandalone",
         "WSA",
         "WindowsStandalone32",
-        "WindowsStandalone64"
+        "WindowsStandalone64",
+"WebGL"
     ],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
