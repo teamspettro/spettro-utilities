@@ -1,13 +1,18 @@
 {
     "name": "Spettro.Editor",
     "rootNamespace": "Spettro",
-    "references": [],
-    "includePlatforms": ["Editor"],
-    "excludePlatforms": [
+    "references": [
+        "GUID:bfb47d6af4bf116449aab586a3c0fac1"
     ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
     "allowUnsafeCode": false,
-    "overrideReferences": false,
-    "precompiledReferences": [],
+    "overrideReferences": true,
+    "precompiledReferences": [
+        ""
+    ],
     "autoReferenced": true,
     "defineConstraints": [],
     "versionDefines": [],
