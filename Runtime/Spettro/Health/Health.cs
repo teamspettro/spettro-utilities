@@ -1,7 +1,41 @@
 using UnityEngine;
 using UnityEngine.Events;
+using Spettro.HealthSystem;
+#if UNITY_EDITOR
+namespace Spettro.Editors
+{
+    [UnityEditor.CustomEditor(typeof(Health))]
+    public class HealthEditor : UnityEditor.Editor
+    {
+        public override void OnInspectorGUI()
+        {
+            DrawDefaultInspector();
 
-namespace Spettro.HP
+            Health h = (Health)target;
+
+            if (UnityEditor.EditorApplication.isPlaying)
+            {
+
+                if (GUILayout.Button("Damage"))
+                {
+                    h.Damage(1);
+                }
+                if (GUILayout.Button("Heal"))
+                {
+                    h.Heal(1);
+                }
+                if (GUILayout.Button("Kill"))
+                {
+                    h.Damage(h.maxHP);
+                }
+            }
+            else
+                UnityEditor.EditorGUILayout.HelpBox("You can control the health script from the inspector if you're in Play Mode.", UnityEditor.MessageType.Info);
+        }
+    }
+}
+#endif
+namespace Spettro.HealthSystem
 {
     public class Health : MonoBehaviour
     {
