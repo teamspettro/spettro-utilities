@@ -1,15 +1,15 @@
 {
     "name": "Spettro.Runtime",
-    "rootNamespace": "",
+    "rootNamespace": "Spettro",
     "references": [],
     "includePlatforms": [
         "Editor",
         "LinuxStandalone64",
         "macOSStandalone",
         "WSA",
+        "WebGL",
         "WindowsStandalone32",
-        "WindowsStandalone64",
-"WebGL"
+        "WindowsStandalone64"
     ],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
