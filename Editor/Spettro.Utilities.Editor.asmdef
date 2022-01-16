@@ -1,6 +1,6 @@
 {
     "name": "Spettro.Editor",
-    "rootNamespace": "",
+    "rootNamespace": "Spettro",
     "references": [],
     "includePlatforms": ["Editor"],
     "excludePlatforms": [
