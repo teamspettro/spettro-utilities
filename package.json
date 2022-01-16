@@ -1,10 +1,23 @@
 {
-    "name": "com.teamspettro.utils",
-    "displayName": "Spettro Utilities",
-    "version": "0.0.1",
-    "description": "Package of useful utilities used and made by Spettro Games.",
-    "author": {"name": "NextinFRFX", "email": "windowsred7198@gmail.com"},
-    "dependencies": {
-        "com.unity.nuget.newtonsoft-json" : "2.0.2"
-    }
+  "name": "com.spettro.utilities",
+  "displayName": "Team Spettro Utilities",
+  "version": "0.0.1",
+  "description": "Utilities for Spettro Games (alpha)",
+  "keywords": [
+    "unity",
+	"unity3d",
+	"upm",
+    "spettro",
+    "utility"
+  ],
+  "homepage": "https://github.com/teamspettro/spettro-utilities.git",
+  "bugs": {
+    "url": "https://github.com/teamspettro/spettro-utilities/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/teamspettro/spettro-utilities.git"
+  },
+  "license": "MIT",
+  "author": "NextinHKRY"
 }
