@@ -2,7 +2,7 @@
     "name": "Spettro.Editor",
     "rootNamespace": "Spettro",
     "references": [
-        "GUID:bfb47d6af4bf116449aab586a3c0fac1"
+        "Spettro.Runtime"
     ],
     "includePlatforms": [
         "Editor"
