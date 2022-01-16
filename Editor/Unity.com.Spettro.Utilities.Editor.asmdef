@@ -1,5 +1,6 @@
 {
-    "name": "Unity.com.{{COMPANY}}.{{REPOSITORY_NAME}}.Editor",
+    "name": "unity.com.Spettro.Utilities.Editor",
+    "rootNamespace": "",
     "references": [],
     "includePlatforms": [
         "Editor"
