@@ -15,7 +15,7 @@ namespace Spettro.DiscordGameSDK
         public Int64 appID;
         public Discord.Discord discord;
         public string defaultBigImageKey;
-        
+
         private ActivityManager activityManager;
         public Activity activity;
 
@@ -83,7 +83,7 @@ namespace Spettro.DiscordGameSDK
                 Debug.LogError($"DiscordManager was unable to dispose of Discord Activity!\n{ex}", this);
             }
         }
-        
+
         void RunMethodCheck(Scene scene, LoadSceneMode mode)
         {
             CheckLevelName(scene);
@@ -107,7 +107,7 @@ namespace Spettro.DiscordGameSDK
                     {
                         activityobject.bigImageKey = defaultBigImageKey;
                     }
-                    switch(activityobject.timestampMode)
+                    switch (activityobject.timestampMode)
                     {
                         case DiscordActivityObject.TimeStampMode.None:
                             {
@@ -131,7 +131,12 @@ namespace Spettro.DiscordGameSDK
                     ///A discord activity.
                     activity = new Discord.Activity()
                     {
+#if UNITY_EDITOR
+                        State = $"[EDITOR] {activityobject.state}",
+#else
                         State = activityobject.state,
+#endif
+
                         Details = activityobject.details,
                         Timestamps =
                     {
