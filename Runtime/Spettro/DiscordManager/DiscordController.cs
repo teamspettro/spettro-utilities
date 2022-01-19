@@ -36,10 +36,6 @@ namespace Spettro.DiscordGameSDK
                 Destroy(gameObject);
             }
         }
-        void OnDestroy()
-        {
-            discord.Dispose();
-        }
         void Start()
         {
             //NoRequireDiscord : Doesn't need discord to run the game
