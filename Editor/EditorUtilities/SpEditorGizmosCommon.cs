@@ -1,3 +1,4 @@
+#if UNITY_EDITOR
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -20,6 +21,12 @@ namespace Spettro.Editors
                 Gizmos.DrawWireCube(tiles[i]
                     + new Vector3(Mathf.Floor(tilemap.transform.position.x) + 0.5f, Mathf.Floor(tilemap.transform.position.y) + 0.5f), new Vector2(1, 1));
             }
+        }
+
+        public static void DrawBox(Vector2 center, Vector2 size, Color color)
+        {
+            Gizmos.color = color;
+            Gizmos.DrawWireCube(center, size);
         }
         /// <summary>
         /// Previews a teleported object
@@ -52,3 +59,5 @@ namespace Spettro.Editors
 
     }
 }
+
+#endif
