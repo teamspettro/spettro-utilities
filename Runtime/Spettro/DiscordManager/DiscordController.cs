@@ -8,7 +8,7 @@ using Spettro.DiscordGameSDK;
 
 namespace Spettro.DiscordGameSDK
 {
-    public class DiscordController : MonoBehaviour
+    public class DiscordController : SingletonBehaviour<DiscordController>
     {
         public bool setDDOLAutomatically = true;
         public DiscordActivityObject[] activities;
