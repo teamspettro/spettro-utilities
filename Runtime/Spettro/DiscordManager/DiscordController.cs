@@ -105,7 +105,7 @@ namespace Spettro.DiscordGameSDK
             });
 
         }
-        void CheckLevelName(Scene scene)
+        public void CheckLevelName(Scene scene)
         {
             ///Grab the scene name
             string lvlName = scene.name;
