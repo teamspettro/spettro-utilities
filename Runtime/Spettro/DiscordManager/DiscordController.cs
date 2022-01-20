@@ -88,6 +88,23 @@ namespace Spettro.DiscordGameSDK
         {
             CheckLevelName(scene);
         }
+        public void UpdateCurrentActivity(Activity newactivity)
+        {
+            activity = newactivity;
+            ///Update the activity
+            activityManager.UpdateActivity(activity, (res) =>
+            {
+                if (res == Discord.Result.Ok)
+                {
+                    Debug.Log("Status Update Success! [Discord]");
+                }
+                else
+                {
+                    Debug.Log("Status Update Failed! [Discord]");
+                }
+            });
+
+        }
         void CheckLevelName(Scene scene)
         {
             ///Grab the scene name
@@ -129,28 +146,9 @@ namespace Spettro.DiscordGameSDK
                     ///Parse all the info of the activity in the activity array and actually turn it into...
                     ///- drum roll -
                     ///A discord activity.
-                    activity = new Discord.Activity()
-                    {
-#if UNITY_EDITOR
-                        State = $"[EDITOR] {activityobject.state}",
-#else
-                        State = activityobject.state,
-#endif
+                    activity = activityobject;
+                    activity.Timestamps.Start = timestamp;
 
-                        Details = activityobject.details,
-                        Timestamps =
-                    {
-                        Start = timestamp
-                    },
-                        Assets =
-                    {
-                        LargeImage = activityobject.bigImageKey,
-                        SmallImage = activityobject.smallImageKey,
-                        LargeText = activityobject.bigImageKeyText,
-                        SmallText = activityobject.smallImageKeyText
-                    }
-
-                    };
                     ///Update the activity
                     activityManager.UpdateActivity(activity, (res) =>
                     {
@@ -173,10 +171,14 @@ namespace Spettro.DiscordGameSDK
             }
             if (count == 0)
             {
+#if UNITY_EDITOR
                 activity = new Discord.Activity()
                 {
                     State = "No state was found for this scene."
                 };
+#else
+                activity = new Discord.Activity();
+#endif
                 activityManager.UpdateActivity(activity, (res) =>
                 {
                     if (res == Discord.Result.Ok)
@@ -203,6 +205,26 @@ namespace Spettro.DiscordGameSDK
         public string details, state;
         public string bigImageKey, smallImageKey, bigImageKeyText, smallImageKeyText;
         public TimeStampMode timestampMode;
+        public static implicit operator Activity(DiscordActivityObject activityobject) =>
+            new Activity
+            {
+
+#if UNITY_EDITOR
+                State = $"[EDITOR] {activityobject.state}",
+#else
+                State = activityobject.state,
+#endif
+
+                Details = activityobject.details,
+                Assets =
+                    {
+                        LargeImage = activityobject.bigImageKey,
+                        SmallImage = activityobject.smallImageKey,
+                        LargeText = activityobject.bigImageKeyText,
+                        SmallText = activityobject.smallImageKeyText
+                    }
+
+            };
         public enum TimeStampMode
         {
             None,
