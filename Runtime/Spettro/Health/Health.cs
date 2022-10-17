@@ -46,6 +46,7 @@ namespace Spettro.HealthSystem
         [Header("Options")]
         public bool log = true;
         public bool lives = false;
+        public bool invulnerable = false;
         public bool resetOnDeath = false;
 
         [Header("Events")]
@@ -64,7 +65,12 @@ namespace Spettro.HealthSystem
 
         public void Damage(int amount)
         {
-            Debug.Log("Recieved damage of " + amount);
+            if(invulnerable)
+            {
+                Debug.Log($"Ignored {amount} damage because of invulnerability.", this);
+                return;
+            }
+            Debug.Log($"Recieved damage of {amount}", this);
             HP -= amount;
             if (HP <= 0)
             {
@@ -73,7 +79,7 @@ namespace Spettro.HealthSystem
                 {
                     OnDeath.Invoke(HP);
                     if (log)
-                        Debug.LogWarning(gameObject.name + " has died.");
+                        Debug.LogWarning($"{gameObject.name} has died.", this);
                     if (resetOnDeath)
                         HealthSet();
                     if (lives)
