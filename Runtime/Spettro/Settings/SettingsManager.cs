@@ -1,6 +1,8 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
+using System;
+using UnityEngine.Events;
 
 namespace Spettro.SettingsSystem
 {
@@ -9,6 +11,11 @@ namespace Spettro.SettingsSystem
     /// </summary>
     public static class SettingsManager
     {
+        /// Because of how the current SettingsManager works, it does not work on any other platform other than 
+        /// Standalone, because of the missing Documents location.
+        /// Since SettingsManager and PlayerPrefs are interchangable, on non-standalone it just uses PlayerPrefs
+        public static UnityEvent<string> OnSettingsUpdate;
+#if UNITY_STANDALONE
         #region Get
         public static int GetInt(string name, int defaultValue = 0)
         {
@@ -107,6 +114,7 @@ namespace Spettro.SettingsSystem
             var settingsInt = SpettroResources.Settings.Int;
             settingsInt[name] = value;
             SpettroResources.Settings.Int = settingsInt;
+            OnSettingsUpdate.Invoke(name);
         }
 
         public static void SetFloat(string name, float value)
@@ -119,7 +127,7 @@ namespace Spettro.SettingsSystem
             var settingsFloat = SpettroResources.Settings.Float;
             settingsFloat[name] = value;
             SpettroResources.Settings.Float = settingsFloat;
-
+            OnSettingsUpdate.Invoke(name);
         }
         public static void SetString(string name, string value)
         {
@@ -130,6 +138,7 @@ namespace Spettro.SettingsSystem
             var settingsString = SpettroResources.Settings.String;
             settingsString[name] = value;
             SpettroResources.Settings.String = settingsString;
+            OnSettingsUpdate.Invoke(name);
         }
         public static void SetBool(string name, bool value)
         {
@@ -141,6 +150,7 @@ namespace Spettro.SettingsSystem
             var settingsBool = SpettroResources.Settings.Bool;
             settingsBool[name] = value;
             SpettroResources.Settings.Bool = settingsBool;
+            OnSettingsUpdate.Invoke(name);
         }
         #endregion
         #region Delete
@@ -178,7 +188,75 @@ namespace Spettro.SettingsSystem
 
         }
         #endregion
+#else
+        #region Get
+        public static int GetInt(string name, int defaultValue = 0)
+        {
+            return PlayerPrefs.GetInt(name, defaultValue);
+        }
+        public static float GetFloat(string name, float defaultValue = 0)
+        {
+            return PlayerPrefs.GetFloat(name, defaultValue);
+        }
 
+        public static string GetString(string name, string defaultValue = "")
+        {
+            return PlayerPrefs.GetString(name, defaultValue);
+        }
+        public static bool GetBool(string name, bool defaultValue = false)
+        {
+            return PlayerPrefs.GetInt(name, Convert.ToInt32(defaultValue)) == 1;
+        }
+        public static object EnumerateSettings()
+        {
+            return SpettroResources.Settings.ExportSettings();
+        }
+        #endregion
+        #region Set
+        public static void SetInt(string name, int value)
+        {
+            PlayerPrefs.SetInt(name, value);
+            OnSettingsUpdate.Invoke(name);
+        }
+
+        public static void SetFloat(string name, float value)
+        {
+            PlayerPrefs.SetFloat(name, value);
+            OnSettingsUpdate.Invoke(name);
+        }
+        public static void SetString(string name, string value)
+        {
+            PlayerPrefs.SetString(name, value);
+            OnSettingsUpdate.Invoke(name);
+        }
+        public static void SetBool(string name, bool value)
+        {
+            PlayerPrefs.SetInt(name, Convert.ToInt32(value));
+            OnSettingsUpdate.Invoke(name);
+        }
+        #endregion
+        #region Delete
+        public static void DeleteAll()
+        {
+            PlayerPrefs.DeleteAll();
+        }
+        #endregion
+
+        #region Has
+        public static bool HasInt(string key)
+        {
+            return PlayerPrefs.HasKey(key);
+        }
+        public static bool HasFloat(string key)
+        {
+            return PlayerPrefs.HasKey(key);
+        }
+        public static bool HasString(string key)
+        {
+            return PlayerPrefs.HasKey(key);
+        }
+        #endregion
+#endif
         ///This doesnt work yet vvv
     }
 
