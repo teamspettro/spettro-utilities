@@ -14,7 +14,7 @@ namespace Spettro.SettingsSystem
         /// Because of how the current SettingsManager works, it does not work on any other platform other than 
         /// Standalone, because of the missing Documents location.
         /// Since SettingsManager and PlayerPrefs are interchangable, on non-standalone it just uses PlayerPrefs
-        public static UnityEvent<string> OnSettingsUpdate;
+        public static UnityEvent<string> OnSettingsUpdate = new UnityEvent<string>();
 #if UNITY_STANDALONE
         #region Get
         public static int GetInt(string name, int defaultValue = 0)
