@@ -41,6 +41,7 @@ namespace Spettro.UI
             {
                 if(changeButtonColors)
                 tabs[i].button.GetComponent<Image>().color = colorInactive;
+                if (tabs[i].tabPage)
                 tabs[i].tabPage.SetActive(false);
                 tabs[i].enabled = false;
             }
