@@ -1,8 +1,8 @@
 {
   "name": "com.spettro.utilities",
   "displayName": "Team Spettro Utilities",
-  "version": "0.0.2",
-  "description": "Utilities for Spettro Games (alpha)",
+  "version": "0.0.3",
+  "description": "Set of utilities made by Team Spettro",
   "keywords": [
     "unity",
 	"unity3d",
