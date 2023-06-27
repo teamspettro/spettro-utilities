@@ -11,11 +11,26 @@ namespace Spettro
 			get
 			{
 				if (singleton == null) singleton = FindObjectOfType<T>();
-				if (singleton == null) Debug.LogWarning($"Could not find instance of {typeof(T).Name} in the scene. Please set it in the inspector.");
+				if (singleton == null && !isMissing)
+                {
+                    Debug.LogWarning($"Could not find instance of {typeof(T).Name} in the scene. Please set it in the inspector.");
+                    isMissing = true;
+                }
 
 				return singleton;
 			}
 		}
+		public static string Tag
+		{
+			get 
+			{
+				if (Instance != null)
+					return Instance.gameObject.tag;
+				else
+					return null;
+			}
+		}
+		private static bool isMissing;
 		private static T singleton;
 
 

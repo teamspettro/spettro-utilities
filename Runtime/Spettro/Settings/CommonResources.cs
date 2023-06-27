@@ -11,7 +11,11 @@ namespace Spettro
         public static bool Empty = false;
         public static string UserPath
         {
+#if UNITY_STANDALONE
             get { return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), Application.companyName, Application.productName); }
+#else
+            get { return Application.persistentDataPath; }
+#endif
         }
     }
 

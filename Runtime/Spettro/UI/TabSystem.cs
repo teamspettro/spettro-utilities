@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace Spettro.UI
@@ -11,6 +12,7 @@ namespace Spettro.UI
         public bool disablePanelsOnStart = false;
         public bool changeButtonColors = true;
         public TabButtonUI[] tabs;
+        public UnityEvent<string> tabName = new UnityEvent<string>();
         [Header("Button Configuration")]
         public Color32 colorActive;
         public Color32 colorInactive;
@@ -33,6 +35,19 @@ namespace Spettro.UI
                 tabs[indexCapped].button.GetComponent<Image>().color = colorActive;
             tabs[indexCapped].tabPage.SetActive(true);
             tabs[indexCapped].enabled = true;
+            tabName.Invoke(tabs[indexCapped].name);
+        }
+        public void NextTab()
+        {
+            activeIndex++;
+            activeIndex = (int)Mathf.Repeat(activeIndex, tabs.Length);
+            ActivateTab(activeIndex);
+        }
+        public void PreviousTab()
+        {
+            activeIndex--;
+            activeIndex = (int)Mathf.Repeat(activeIndex, tabs.Length);
+            ActivateTab(activeIndex);
         }
         public void DisablePanels()
         {
@@ -52,6 +67,7 @@ namespace Spettro.UI
     {
         public Button button;
         public GameObject tabPage;
+        public string name;
         public bool enabled;
     }
 
